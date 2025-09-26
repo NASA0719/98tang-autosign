@@ -6,12 +6,16 @@ on:
   schedule:
     # 每天北京时间0:00执行 (UTC+8 = UTC+0-8, 所以0点对应UTC 16点)
     # 注意：schedule 只在默认分支(main)上运行
-    - cron: '0 16 * * *'   # 北京时间 0:00
+    - cron: '9 2 * * *'   # 北京时间 0:00
   workflow_dispatch:
     # 允许手动触发 - 可在任何分支运行
   push:
     # 当推送到main分支时触发（develop分支不会自动运行）
     branches: [ main ]
+    # 排除工作流文件自身的修改
+    paths-ignore:
+      - '.github/workflows/**'  # 排除 .github/workflows 目录下的所有文件
+      - 'README.md'
   pull_request:
     # 当创建PR到指定分支时触发（可选，用于测试）
     branches: [ main ]
